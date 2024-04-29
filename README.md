@@ -52,6 +52,7 @@ go get gorm.io/driver/mysql
 go get -u github.com/sirupsen/logrus
 go install github.com/google/wire/cmd/wire@latest
 go get github.com/stretchr/testify/assert
+go install github.com/cosmtrek/air@latest
 
 
 `install another package`
@@ -100,13 +101,14 @@ go get github.com/stretchr/testify/assert
 │       │       └── {feature}_service.go          # Service Contract Abstraction
 │       └── shared                                # Shared Component
 │           ├── {db}                              # Database (Replace {db} with Database you will use)
-│           │   ├── model                         # Model 
+│           │   ├── model                         # Model
 │           │   └── conn.go                       # Database Connection
 │           ├── util.go                           # Utility Function
 │           └── constant.go                       # Shared Constant
 └── mocks                                         # Test Data
     └── feature_mock.go
 ```
+
 - **Domain Layer:**
   - Purpose: The domain layer contains the core business logic and domain models of the application. It encapsulates the concepts, rules, and behaviors that are central to the problem domain.
   - Responsibilities:
