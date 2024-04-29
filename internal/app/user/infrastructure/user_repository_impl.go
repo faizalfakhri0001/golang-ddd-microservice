@@ -2,6 +2,7 @@ package infrastructure
 
 import (
 	"golang-gin-ddd/internal/app/user/domain"
+	"golang-gin-ddd/pkg/errors"
 
 	"gorm.io/gorm"
 )
@@ -22,7 +23,11 @@ func (rp *UserRepositoryImpl) Create() error {
 
 func (rp *UserRepositoryImpl) GetById(id string) (*domain.User, error) {
 	var user domain.User
-	result := rp.db.Find(&user).Where("id=?", id)
+	if err := rp.db.First(&user, id).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errors.ErrNotFound
+		}
+	}
 
-	return &user, result.Error
+	return &user, nil
 }
